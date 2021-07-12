@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import contactsAction from 'redux/contacts/contacts-actions';
+import { deleteContact } from 'redux/contacts/contacts-operations';
 import ElementContactList from './ElementContactList';
 
 const getVisibleContacts = (contacts, filter) => {
@@ -13,12 +13,12 @@ const getVisibleContacts = (contacts, filter) => {
   );
 };
 
-const mapStateToProps = ({ items, filter }) => ({
+const mapStateToProps = ({ contacts: { items, filter } }) => ({
   contacts: getVisibleContacts(items, filter),
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteContact: id => dispatch(contactsAction.deleteContact(id)),
+  deleteContact: id => dispatch(deleteContact(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ElementContactList);

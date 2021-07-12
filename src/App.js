@@ -8,12 +8,16 @@ import ContactForm from 'components/ContactForm';
 import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
 import Container from 'components/Container';
+import { fetchContacts } from 'redux/contacts/contacts-operations';
 
 class App extends Component {
   static propTypes = {
     contacts: PropTypes.array,
     filter: PropTypes.string,
   };
+  componentDidMount() {
+    this.props.onFetchContacts();
+  }
 
   // componentDidUpdate(prevProps, prevState) {
   //   const nextContacts = this.props.contacts;
@@ -40,4 +44,8 @@ const mapStateToProps = state => ({
   contacts: state.items,
 });
 
-export default connect(mapStateToProps)(App);
+const mapDispatchToProps = dispatch => ({
+  onFetchContacts: () => dispatch(fetchContacts()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
