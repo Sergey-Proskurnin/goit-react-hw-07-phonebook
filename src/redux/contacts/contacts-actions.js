@@ -1,4 +1,3 @@
-// import { v4 as uuidv4 } from 'uuid';
 import { createAction } from '@reduxjs/toolkit';
 
 const fetchContactRequest = createAction('contacts/fetchContactRequest');
@@ -13,7 +12,6 @@ const deleteContactRequest = createAction('contacts/deleteContactRequest');
 const deleteContactSuccess = createAction('contacts/deleteContactSuccess');
 const deleteContactError = createAction('contacts/deleteContactError');
 
-// const deleteContact = createAction('contacts/delete');
 const changeFilter = createAction('contacts/changeFilter');
 
 export {

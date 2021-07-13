@@ -9,6 +9,7 @@ import Filter from 'components/Filter';
 import ContactList from 'components/ContactList';
 import Container from 'components/Container';
 import { fetchContacts } from 'redux/contacts/contacts-operations';
+import { getLoading } from 'redux/contacts/contacts-selectors';
 
 class App extends Component {
   static propTypes = {
@@ -19,29 +20,26 @@ class App extends Component {
     this.props.onFetchContacts();
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   const nextContacts = this.props.contacts;
-  //   const prevContacts = prevProps.contacts;
-
-  //   if (nextContacts !== prevContacts) {
-  //     localStorage.setItem('contacts', JSON.stringify(nextContacts));
-  //   }
-  // }
-
   render() {
     return (
       <Container title="Phonebook">
         <ContactForm />
         <h2 className="title">Contacts</h2>
-        <Filter />
-        <ContactList />
+        {this.props.isLoadingContacts ? (
+          <h2>Loading...</h2>
+        ) : (
+          <>
+            <Filter />
+            <ContactList />
+          </>
+        )}
       </Container>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  contacts: state.items,
+  isLoadingContacts: getLoading(state),
 });
 
 const mapDispatchToProps = dispatch => ({

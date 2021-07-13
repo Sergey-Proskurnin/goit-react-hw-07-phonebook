@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import s from './Filter.module.css';
 
 import { changeFilter } from 'redux/contacts/contacts-actions';
+import { getFilter } from 'redux/contacts/contacts-selectors';
 
 const filterInputId = uuidv4();
 
@@ -30,7 +31,7 @@ Filter.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  filter: state.filter,
+  filter: getFilter(state),
 });
 
 const mapDispatchToProps = dispatch => ({

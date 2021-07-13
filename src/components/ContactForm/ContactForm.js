@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import s from './ContactForm.module.css';
 import { addContact } from 'redux/contacts/contacts-operations';
+import { getAllContacts } from 'redux/contacts/contacts-selectors';
 
 class ContactForm extends Component {
   static defaultProps = {
@@ -105,7 +106,7 @@ class ContactForm extends Component {
 }
 
 const mapStateToProps = state => ({
-  contacts: state.contacts.items,
+  contacts: getAllContacts(state),
 });
 
 const mapDispatchToProps = dispatch => ({
