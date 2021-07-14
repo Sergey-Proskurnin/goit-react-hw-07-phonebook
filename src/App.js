@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import OnLoader from 'components/OnLoader';
 
 import './App.css';
 
@@ -13,8 +14,8 @@ import { getLoading } from 'redux/contacts/contacts-selectors';
 
 class App extends Component {
   static propTypes = {
-    contacts: PropTypes.array,
-    filter: PropTypes.string,
+    onFetchContacts: PropTypes.func,
+    isLoadingContacts: PropTypes.bool,
   };
   componentDidMount() {
     this.props.onFetchContacts();
@@ -26,7 +27,7 @@ class App extends Component {
         <ContactForm />
         <h2 className="title">Contacts</h2>
         {this.props.isLoadingContacts ? (
-          <h2>Loading...</h2>
+          <OnLoader />
         ) : (
           <>
             <Filter />

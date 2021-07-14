@@ -16,6 +16,8 @@ class ContactForm extends Component {
   static propTypes = {
     name: PropTypes.string,
     number: PropTypes.string,
+    contacts: PropTypes.array,
+    onSubmit: PropTypes.func,
   };
 
   state = {
