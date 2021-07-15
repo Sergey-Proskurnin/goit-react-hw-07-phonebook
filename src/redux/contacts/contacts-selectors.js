@@ -6,8 +6,11 @@ const getFilter = state => state.contacts.filter;
 
 const getAllContacts = state => state.contacts.items;
 
+const sortAllContact = createSelector([getAllContacts], contacts => {
+  return contacts.slice().sort((a, b) => b.id - a.id);
+});
 const getVisibleContacts = createSelector(
-  [getAllContacts, getFilter],
+  [sortAllContact, getFilter],
   (contacts, filter) => {
     const normalizedFilter = filter.toLowerCase().trim();
     return contacts.filter(
@@ -18,4 +21,10 @@ const getVisibleContacts = createSelector(
   },
 );
 
-export { getLoading, getFilter, getVisibleContacts, getAllContacts };
+export {
+  getLoading,
+  getFilter,
+  getVisibleContacts,
+  getAllContacts,
+  sortAllContact,
+};

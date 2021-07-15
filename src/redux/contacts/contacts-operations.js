@@ -1,9 +1,10 @@
 import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import {
-  fetchContactRequest,
-  fetchContactSuccess,
-  fetchContactError,
+  // fetchContactRequest,
+  // fetchContactSuccess,
+  // fetchContactError,
   addContactRequest,
   addContactSuccess,
   addContactError,
@@ -14,15 +15,23 @@ import {
 
 axios.defaults.baseURL = 'http://localhost:4040';
 
-const fetchContacts = () => async dispatch => {
-  dispatch(fetchContactRequest());
-  try {
-    const { data } = await axios.get('/contacts');
-    dispatch(fetchContactSuccess(data));
-  } catch (error) {
-    dispatch(fetchContactError(error));
-  }
-};
+//--------------------------------createAsyncThunk------------------------
+const fetchContacts = createAsyncThunk('contacts/fetchContact', async () => {
+  const { data } = await axios.get('/contacts');
+  return data;
+});
+
+// ---------------------------async-await-------------------------
+// const fetchContacts = () => async dispatch => {
+//   dispatch(fetchContactRequest());
+//   try {
+//     const { data } = await axios.get('/contacts');
+//     dispatch(fetchContactSuccess(data));
+//   } catch (error) {
+//     dispatch(fetchContactError(error));
+//   }
+// };
+
 // -----------------then-cath----------------------------------
 // const fetchContacts = () => dispatch => {
 //   dispatch(fetchContactRequest());

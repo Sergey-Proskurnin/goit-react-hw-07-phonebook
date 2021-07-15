@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import s from './ContactForm.module.css';
-import { addContact } from 'redux/contacts/contacts-operations';
-import { getAllContacts } from 'redux/contacts/contacts-selectors';
+
+import { addContact, getAllContacts } from 'redux/contacts';
+// import { addContact } from 'redux/contacts/contacts-operations';
+// import { getAllContacts } from 'redux/contacts/contacts-selectors';
 
 class ContactForm extends Component {
   static defaultProps = {

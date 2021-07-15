@@ -4,9 +4,9 @@ import { createReducer } from '@reduxjs/toolkit';
 import contactsTest from 'data/contactsTest.json';
 import {
   changeFilter,
-  fetchContactRequest,
-  fetchContactSuccess,
-  fetchContactError,
+  // fetchContactRequest,
+  // fetchContactSuccess,
+  // fetchContactError,
   addContactRequest,
   addContactSuccess,
   addContactError,
@@ -15,17 +15,19 @@ import {
   deleteContactError,
 } from './contacts-actions';
 
+import { fetchContacts } from './contacts-operations';
+
 const items = createReducer(contactsTest, {
-  [fetchContactSuccess]: (_, { payload }) => payload,
+  [fetchContacts.fulfilled]: (_, { payload }) => payload,
   [addContactSuccess]: (state, action) => [action.payload, ...state],
   [deleteContactSuccess]: (state, action) =>
     state.filter(({ id }) => id !== action.payload),
 });
 
 const loading = createReducer(false, {
-  [fetchContactRequest]: () => true,
-  [fetchContactSuccess]: () => false,
-  [fetchContactError]: () => false,
+  [fetchContacts.pending]: () => true,
+  [fetchContacts.fulfilled]: () => false,
+  [fetchContacts.rejected]: () => false,
   [addContactRequest]: () => true,
   [addContactSuccess]: () => false,
   [addContactError]: () => false,
